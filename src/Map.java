@@ -1,9 +1,12 @@
+import java.io.PrintStream;
+
 class Map {
     public Carrier carrier;
     public Battleship battleship;
     public Cruiser cruiser;
     public Submarine submarine;
     public Destroyer destroyer;
+    private int map_hitbox;
 
     private boolean[][] occupied = new boolean[12][12];
 
@@ -82,6 +85,7 @@ class Map {
             occupied[p.getX()][p.getY()-1] = true;
         }
 
+        map_hitbox = 17;
     }
 
     public void print_map(){
@@ -90,6 +94,58 @@ class Map {
         cruiser.print_Ship();
         submarine.print_Ship();
         destroyer.print_Ship();
+    }
+
+    public int shoot(int x, int y){
+        if(!(x >= 1 && x <= 10 && y >= 1 && y <= 10)){
+            //out of bounds shot
+            System.out.println("Map error: out of bounds shot");
+            return -1;
+        }
+
+        int ret = 0;
+        for(Point i : carrier.hitbox){
+            if(i != null && i.getX() == x && i.getY() == y){
+                ret = carrier.shot(x, y);
+                map_hitbox--;
+                return  ret;
+            }
+        }
+        for(Point i : battleship.hitbox){
+            if(i != null && i.getX() == x && i.getY() == y){
+                ret = battleship.shot(x, y);
+                map_hitbox--;
+                return  ret;
+            }
+        }
+        for(Point i : cruiser.hitbox){
+            if(i != null && i.getX() == x && i.getY() == y){
+                ret = cruiser.shot(x, y);
+                map_hitbox--;
+                return  ret;
+            }
+        }
+        for(Point i : submarine.hitbox){
+            if(i != null && i.getX() == x && i.getY() == y){
+                ret = submarine.shot(x, y);
+                map_hitbox--;
+                return  ret;
+            }
+        }
+        for(Point i : destroyer.hitbox){
+            if(i != null && i.getX() == x && i.getY() == y){
+                ret = destroyer.shot(x, y);
+                map_hitbox--;
+                return  ret;
+            }
+        }
+
+        if(map_hitbox <= 0){
+            System.out.println("All ships down");
+            return -2;
+        }
+
+        return  ret;
     }
 
 }

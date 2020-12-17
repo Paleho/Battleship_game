@@ -3,6 +3,8 @@ class Ship{
     public boolean vertical;
     public Point[] hitbox;
     public int length = 0;
+    public int damage_bonus, sink_bonus;
+    public int hitpoints;
 
     enum ShipState{
         Intact,
@@ -20,6 +22,7 @@ class Ship{
             vertical = false;
             length = Math.abs(edge1.getY()-edge2.getY()) + 1;
             hitbox = new Point[length];
+            hitpoints = length;
             // begin = lowest y
             begin = Math.min(edge1.getY(), edge2.getY());
         }
@@ -27,6 +30,7 @@ class Ship{
             vertical = true;
             length = Math.abs(edge1.getX()-edge2.getX()) + 1;
             hitbox = new Point[length];
+            hitpoints = length;
             // begin = lowest x
             begin = Math.min(edge1.getX(), edge2.getX());
         }
@@ -56,22 +60,38 @@ class Ship{
         }
         System.out.println();
     }
-
+    public int shot(int x, int y){
+        for(int i = 0; i < length; i++){
+            Point p = hitbox[i];
+            if(p != null && p.getY() == y && p.getX() == x){
+                hitbox[i] = null;
+                hitpoints--;
+            }
+            if(hitpoints <= 0)
+                return sink() + damage_bonus;
+            return damage_bonus;
+        }
+        return 0;
+    }
+    public int sink(){
+        return sink_bonus;
+    }
 }
 
 class Carrier extends Ship{
+
     public Carrier(Point p1, Point p2){
         super(p1, p2);
         if(length != 5)
             System.out.print("Invalid Carrier length!\n");
+        damage_bonus = 350;
+        sink_bonus = 1000;
     }
 
     public void print_Ship(){
         System.out.print("Carrier: ");
         super.print_Ship();
     }
-    public int shot(){ return 350;}
-    public int sink(){ return 1000;}
 }
 
 class Battleship extends Ship{
@@ -79,14 +99,14 @@ class Battleship extends Ship{
         super(p1, p2);
         if(length != 4)
             System.out.print("Invalid Battleship length!\n");
+        damage_bonus = 250;
+        sink_bonus = 500;
     }
 
     public void print_Ship(){
         System.out.print("Battleship: ");
         super.print_Ship();
     }
-    public int shot(){ return 250;}
-    public int sink(){ return 500;}
 }
 
 class Cruiser extends Ship{
@@ -94,14 +114,14 @@ class Cruiser extends Ship{
         super(p1, p2);
         if(length != 3)
             System.out.print("Invalid Cruiser length!\n");
+        damage_bonus = 100;
+        sink_bonus = 250;
     }
 
     public void print_Ship(){
         System.out.print("Cruiser: ");
         super.print_Ship();
     }
-    public int shot(){ return 100;}
-    public int sink(){ return 250;}
 }
 
 class Submarine extends Ship{
@@ -109,14 +129,14 @@ class Submarine extends Ship{
         super(p1, p2);
         if(length != 3)
             System.out.print("Invalid Submarine length!\n");
+        damage_bonus = 100;
+        sink_bonus = 0;
     }
 
     public void print_Ship(){
         System.out.print("Submarine: ");
         super.print_Ship();
     }
-    public int shot(){ return 100;}
-    public int sink(){ return 0;}
 }
 
 class Destroyer extends Ship{
@@ -124,12 +144,12 @@ class Destroyer extends Ship{
         super(p1, p2);
         if(length != 2)
             System.out.print("Invalid Destroyer length!\n");
+        damage_bonus = 50;
+        sink_bonus = 0;
     }
 
     public void print_Ship(){
         System.out.print("Destroyer: ");
         super.print_Ship();
     }
-    public int shot(){ return 50;}
-    public int sink(){ return 0;}
 }
