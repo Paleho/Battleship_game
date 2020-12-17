@@ -11,7 +11,7 @@ public class Main{
                              new Point(10, 5), Direction.Left);
 
         my_map.print_map();
-
+        System.out.println("map_hitpoints = " + my_map.getHitpoints());
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
         while(true){
             System.out.println("Pick a shot (x, y): ");
@@ -19,7 +19,14 @@ public class Main{
                 int shot_x = Integer.parseInt(stdin.readLine());
                 int shot_y = Integer.parseInt(stdin.readLine());
                 if(shot_x >= 1 && shot_x <= 10 && shot_y >= 1 && shot_y <= 10){
-                    System.out.println("Score += " + my_map.shoot(shot_x, shot_y));
+                    int score = my_map.shoot(shot_x, shot_y);
+                    System.out.println("map_hitpoints = " + my_map.getHitpoints());
+                    if(score == -2) {
+                        System.out.println("Game over!");
+                        break;
+                    }
+                    else
+                        System.out.println("Score += " + score);
                 }
                 else{
                     System.out.println("Invalid Point! : 1 <= x <= 10, 1 <= y <= 10");

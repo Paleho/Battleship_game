@@ -2,9 +2,9 @@ class Ship{
     public Point edge1, edge2;
     public boolean vertical;
     public Point[] hitbox;
-    public int length = 0;
+    public int length;
     public int damage_bonus, sink_bonus;
-    public int hitpoints;
+    protected int hitpoints;
 
     enum ShipState{
         Intact,
@@ -66,10 +66,11 @@ class Ship{
             if(p != null && p.getY() == y && p.getX() == x){
                 hitbox[i] = null;
                 hitpoints--;
+                System.out.printf("ship hitpoints = %d\n", hitpoints); //debug
+                if(hitpoints <= 0)
+                    return sink() + damage_bonus;
+                return damage_bonus;
             }
-            if(hitpoints <= 0)
-                return sink() + damage_bonus;
-            return damage_bonus;
         }
         return 0;
     }

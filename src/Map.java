@@ -1,4 +1,3 @@
-import java.io.PrintStream;
 
 class Map {
     public Carrier carrier;
@@ -6,7 +5,7 @@ class Map {
     public Cruiser cruiser;
     public Submarine submarine;
     public Destroyer destroyer;
-    private int map_hitbox;
+    private int map_hitpoints;
 
     private boolean[][] occupied = new boolean[12][12];
 
@@ -85,7 +84,7 @@ class Map {
             occupied[p.getX()][p.getY()-1] = true;
         }
 
-        map_hitbox = 17;
+        map_hitpoints = 17;
     }
 
     public void print_map(){
@@ -104,43 +103,47 @@ class Map {
         }
 
         int ret = 0;
-        for(Point i : carrier.hitbox){
-            if(i != null && i.getX() == x && i.getY() == y){
-                ret = carrier.shot(x, y);
-                map_hitbox--;
-                return  ret;
+        // one time loop
+        outer:
+        for (int k = 0; k < 1; k++) {
+            for(Point i : carrier.hitbox){
+                if(i != null && i.getX() == x && i.getY() == y){
+                    ret = carrier.shot(x, y);
+                    map_hitpoints--;
+                    break outer;
+                }
             }
-        }
-        for(Point i : battleship.hitbox){
-            if(i != null && i.getX() == x && i.getY() == y){
-                ret = battleship.shot(x, y);
-                map_hitbox--;
-                return  ret;
+            for(Point i : battleship.hitbox){
+                if(i != null && i.getX() == x && i.getY() == y){
+                    ret = battleship.shot(x, y);
+                    map_hitpoints--;
+                    break outer;
+                }
             }
-        }
-        for(Point i : cruiser.hitbox){
-            if(i != null && i.getX() == x && i.getY() == y){
-                ret = cruiser.shot(x, y);
-                map_hitbox--;
-                return  ret;
+            for(Point i : cruiser.hitbox){
+                if(i != null && i.getX() == x && i.getY() == y){
+                    ret = cruiser.shot(x, y);
+                    map_hitpoints--;
+                    break outer;
+                }
             }
-        }
-        for(Point i : submarine.hitbox){
-            if(i != null && i.getX() == x && i.getY() == y){
-                ret = submarine.shot(x, y);
-                map_hitbox--;
-                return  ret;
+            for(Point i : submarine.hitbox){
+                if(i != null && i.getX() == x && i.getY() == y){
+                    ret = submarine.shot(x, y);
+                    map_hitpoints--;
+                    break outer;
+                }
             }
-        }
-        for(Point i : destroyer.hitbox){
-            if(i != null && i.getX() == x && i.getY() == y){
-                ret = destroyer.shot(x, y);
-                map_hitbox--;
-                return  ret;
+            for(Point i : destroyer.hitbox){
+                if(i != null && i.getX() == x && i.getY() == y){
+                    ret = destroyer.shot(x, y);
+                    map_hitpoints--;
+                    break outer;
+                }
             }
         }
 
-        if(map_hitbox <= 0){
+        if(map_hitpoints <= 0){
             System.out.println("All ships down");
             return -2;
         }
@@ -148,4 +151,5 @@ class Map {
         return  ret;
     }
 
+    public int getHitpoints(){ return map_hitpoints;}
 }
