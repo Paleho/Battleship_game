@@ -293,7 +293,7 @@ class Map {
         map_hitpoints = 17;
     }
 
-
+    //returns true if there is no occupied tile between p and p + dist (vertically or horizontally)
     private boolean overlaps(Point p, int dist, boolean vert){
         if(vert){
             for(int target_x = p.getX(); target_x <= p.getX() + dist; target_x++){
