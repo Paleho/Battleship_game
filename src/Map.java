@@ -96,6 +96,10 @@ class Map {
         destroyer.print_Ship();
     }
 
+    //on successful hit returns score
+    //on unsuccessful attempt returns 0
+    //on invalid attempt returns -1
+    //on all ships down returns -2
     public int shoot(int x, int y){
         if(!(x >= 1 && x <= 10 && y >= 1 && y <= 10)){
             //out of bounds shot

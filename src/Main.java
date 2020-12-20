@@ -4,9 +4,17 @@ import java.io.InputStreamReader;
 
 public class Main{
     public static void main(String[] args) {
-        Map my_map = new Map();
+        Map ships_map = new Map();
+        Map enemy_map = new Map();
 
-        my_map.print_map();
+        System.out.println("Random map:");
+        enemy_map.print_map();
+
+        RandomPlayer cpu_player = new RandomPlayer("CPU", ships_map);
+
+        while(enemy_map.getHitpoints() > 0)
+            cpu_player.random_play(enemy_map);
+
 //        System.out.println("map_hitpoints = " + my_map.getHitpoints());
 //        BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 //        while(true){
