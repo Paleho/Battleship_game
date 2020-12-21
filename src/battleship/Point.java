@@ -1,3 +1,5 @@
+package battleship;
+
 import java.util.Random;
 
 class Point{
@@ -12,7 +14,7 @@ class Point{
         }
     }
 
-    //relative Point constructor
+    //relative battleship.Point constructor
     public Point(Point other_point, Direction dir, int distance){
         int new_x, new_y;
 
@@ -49,7 +51,7 @@ class Point{
         }
     }
 
-    //random Point constructor
+    //random battleship.Point constructor
     public Point(){
         Random rand = new Random();
 
@@ -65,5 +67,13 @@ class Point{
     public int getY(){return y;}
     public void print_Point(){
         System.out.printf("(%d,%d)", x, y);
+    }
+
+    public static boolean isPoint(int i, int j) throws InvalidPointException {
+        if(i >= 1 && i <= 10 && j >= 1 && j <= 10)
+            return true;
+        else{
+            throw new InvalidPointException("Point (" + i + "," + j + ") out of table!");
+        }
     }
 }

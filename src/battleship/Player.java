@@ -1,3 +1,5 @@
+package battleship;
+
 class Player {
     String name;
     Map ships_map;

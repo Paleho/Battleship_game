@@ -1,3 +1,5 @@
+package battleship;
+
 import java.util.Random;
 
 class Map {
@@ -39,7 +41,7 @@ class Map {
         battleship = new Battleship(bat_point, new Point(bat_point, bat_direction, 3));
         for (Point p : battleship.hitbox){
             if(occupied[p.getX()][p.getY()])
-                System.out.println("Map error: Ships overlap (" + p.getX() + "," + p.getY() + ") (battleship)");
+                System.out.println("battleship.Map error: Ships overlap (" + p.getX() + "," + p.getY() + ") (battleship)");
         }
         for (Point p : battleship.hitbox){
             occupied[p.getX()][p.getY()] = true;
@@ -51,7 +53,7 @@ class Map {
         cruiser = new Cruiser(cru_point, new Point(cru_point, cru_direction, 2));
         for (Point p : cruiser.hitbox){
             if(occupied[p.getX()][p.getY()])
-                System.out.println("Map error: Ships overlap (" + p.getX() + "," + p.getY() + ") (cruiser)");
+                System.out.println("battleship.Map error: Ships overlap (" + p.getX() + "," + p.getY() + ") (cruiser)");
         }
         for (Point p : cruiser.hitbox){
             occupied[p.getX()][p.getY()] = true;
@@ -63,7 +65,7 @@ class Map {
         submarine = new Submarine(sub_point, new Point(sub_point, sub_direction, 2));
         for (Point p : submarine.hitbox){
             if(occupied[p.getX()][p.getY()])
-                System.out.println("Map error: Ships overlap (" + p.getX() + "," + p.getY() + ") (submarine)");
+                System.out.println("battleship.Map error: Ships overlap (" + p.getX() + "," + p.getY() + ") (submarine)");
         }
         for (Point p : submarine.hitbox){
             occupied[p.getX()][p.getY()] = true;
@@ -75,7 +77,7 @@ class Map {
         destroyer = new Destroyer(des_point, new Point(des_point, des_direction, 1));
         for (Point p : destroyer.hitbox){
             if(occupied[p.getX()][p.getY()])
-                System.out.println("Map error: Ships overlap (" + p.getX() + "," + p.getY() + ") (destroyer)");
+                System.out.println("battleship.Map error: Ships overlap (" + p.getX() + "," + p.getY() + ") (destroyer)");
         }
         for (Point p : destroyer.hitbox){
             occupied[p.getX()][p.getY()] = true;
@@ -103,7 +105,7 @@ class Map {
     public int shoot(int x, int y){
         if(!(x >= 1 && x <= 10 && y >= 1 && y <= 10)){
             //out of bounds shot
-            System.out.println("Map error: out of bounds shot");
+            System.out.println("battleship.Map error: out of bounds shot");
             return -1;
         }
 

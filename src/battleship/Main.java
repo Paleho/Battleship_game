@@ -1,3 +1,5 @@
+package battleship;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -84,7 +86,7 @@ public class Main{
                         System.out.println("Score += " + score);
                 }
                 else{
-                    System.out.println("Invalid Point! : 1 <= x <= 10, 1 <= y <= 10");
+                    System.out.println("Invalid battleship.Point! : 1 <= x <= 10, 1 <= y <= 10");
                     System.out.println("Try again..");
                 }
             } catch (IOException ioe) {
