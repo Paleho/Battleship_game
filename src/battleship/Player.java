@@ -206,6 +206,7 @@ class RandomPlayer extends Player{
             memory[point_index++] = new Point(x, y);    //add point to memory array and increase index
         }
         else if(score == -3){
+            shooting_map[x][y] = 1;
             System.out.println("Random player won!");
         }
         else{
