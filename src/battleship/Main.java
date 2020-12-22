@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Random;
 
 public class Main{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ShipsOverlap {
         Map cpu_ships = new Map();
 
         System.out.println("Random cpu map:");

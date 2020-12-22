@@ -36,18 +36,29 @@ public class Controller1 {
             int car_x = Integer.parseInt(txt_car_x.getText());
             int car_y = Integer.parseInt(txt_car_y.getText());
             Point.isPoint(car_x, car_y);
+            Direction car_dir = (chk_car_vert.isSelected()) ? Direction.Down : Direction.Right;
             int bat_x = Integer.parseInt(txt_bat_x.getText());
             int bat_y = Integer.parseInt(txt_bat_y.getText());
             Point.isPoint(bat_x, bat_y);
+            Direction bat_dir = (chk_bat_vert.isSelected()) ? Direction.Down : Direction.Right;
             int cru_x = Integer.parseInt(txt_cru_x.getText());
             int cru_y = Integer.parseInt(txt_cru_y.getText());
             Point.isPoint(cru_x, cru_y);
+            Direction cru_dir = (chk_cru_vert.isSelected()) ? Direction.Down : Direction.Right;
             int sub_x = Integer.parseInt(txt_sub_x.getText());
             int sub_y = Integer.parseInt(txt_sub_y.getText());
             Point.isPoint(sub_x, sub_y);
+            Direction sub_dir = (chk_sub_vert.isSelected()) ? Direction.Down : Direction.Right;
             int des_x = Integer.parseInt(txt_des_x.getText());
             int des_y = Integer.parseInt(txt_des_y.getText());
             Point.isPoint(des_x, des_y);
+            Direction des_dir = (chk_des_vert.isSelected()) ? Direction.Down : Direction.Right;
+
+            Map input_map = new Map(new Point(car_x, car_y), car_dir,
+                                    new Point(bat_x, bat_y), bat_dir,
+                                    new Point(cru_x, cru_y), cru_dir,
+                                    new Point(sub_x, sub_y), sub_dir,
+                                    new Point(des_x, des_y), des_dir);
             System.out.println("Ok!");
 
             Parent root2 = FXMLLoader.load(getClass().getResource("scene2.fxml"));

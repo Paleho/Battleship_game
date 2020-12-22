@@ -6,3 +6,9 @@ class InvalidPointException extends Exception {
         super(s);
     }
 }
+
+class ShipsOverlap extends Exception{
+    public ShipsOverlap(String s){
+        super(s);
+    }
+}
