@@ -66,17 +66,17 @@ class Player {
 }
 
 class RandomPlayer extends Player{
-    Point[] memory; //will hold up to 5 points that represent a ship that the player found
-    boolean found_target;
-    int point_index;    // index in the memory array
-    int dir;
-    boolean changed_dir;
+    private Point[] memory; //will hold up to 5 points that represent a ship that the player found
+    private boolean found_target;
+    private int point_index;    // index in the memory array
+    private int dir;
+    private boolean changed_dir;
 //    for finding ship:
 //    0 --> go up
 //    1 --> go down
 //    2 --> go right
 //    3 --> go left
-    Boolean vertical;   //need to store 3 states
+    private Boolean vertical;   //need to store 3 states
 //  null --> no idea if the ship found is vertical or horizontal
 //  false --> the ship found is horizontal
 //  true --> the ship found is vertical
@@ -115,6 +115,8 @@ class RandomPlayer extends Player{
             //what happens if found a ship with a previous shot?
             while(true){
                 if(dir == 0){   //UP
+                    System.out.print("Going up from point ");
+                    memory[point_index - 1].print_Point();
                     x = memory[point_index - 1].getX() - 1;   //point_index - 1 --> recent point added
                     y = memory[point_index - 1].getY();
                     if (get_shooting_map(x, y) != -1) {//you plan to shoot somewhere that is not needed
@@ -122,13 +124,14 @@ class RandomPlayer extends Player{
                         changed_dir = true;
                     }
                     else {
-                        vertical = true;
                         break;
                     }
                 }
                 else if(dir == 1){   //DOWN
                     int pivot = changed_dir? 0 : point_index - 1;
                     changed_dir = false;
+                    System.out.print("Going down from point ");
+                    memory[pivot].print_Point();
                     x = memory[pivot].getX() + 1;   //point_index - 1 --> recent point added
                     y = memory[pivot].getY();
                     if(get_shooting_map(x, y) != -1 && vertical){
@@ -139,13 +142,15 @@ class RandomPlayer extends Player{
                         changed_dir = true;
                     }
                     else{
-                        vertical = true;
+                        vertical = (point_index > 1);
                         break;
                     }
                 }
                 else if(dir == 2){  //RIGHT
                     int pivot = changed_dir? 0 : point_index - 1;
                     changed_dir = false;
+                    System.out.print("Going right from point ");
+                    memory[pivot].print_Point();
                     x = memory[pivot].getX();   //point_index - 1 --> recent point added
                     y = memory[pivot].getY() + 1;
                     if (get_shooting_map(x, y) != -1) {//you plan to shoot somewhere that is not needed
@@ -159,6 +164,8 @@ class RandomPlayer extends Player{
                 else if(dir == 3) {  //LEFT
                     int pivot = changed_dir? 0 : point_index - 1;
                     changed_dir = false;
+                    System.out.print("Going left from point ");
+                    memory[pivot].print_Point();
                     x = memory[pivot].getX();   //point_index - 1 --> recent point added
                     y = memory[pivot].getY() - 1;
                     if (get_shooting_map(x, y) != -1) {//you plan to shoot somewhere that is not needed
@@ -175,6 +182,7 @@ class RandomPlayer extends Player{
                     point_index = 0;
                     dir = 0;
                     changed_dir = false;
+                    vertical = false;
                     return random_play(enemy_map);
                 }
             }
@@ -197,6 +205,7 @@ class RandomPlayer extends Player{
                     point_index = 0;
                     dir = 0;
                     changed_dir = false;
+                    vertical = false;
                 }
             }
         }
@@ -204,6 +213,10 @@ class RandomPlayer extends Player{
             shooting_map[x][y] = 1;
             found_target = true;
             memory[point_index++] = new Point(x, y);    //add point to memory array and increase index
+            if(point_index == 2){
+                vertical = (memory[0].getY() == memory[1].getY());
+                System.out.println("found " + (vertical ? "vertical" : "horizontal"));
+            }
         }
         else if(score == -3){
             shooting_map[x][y] = 1;
