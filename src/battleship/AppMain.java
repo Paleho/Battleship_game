@@ -11,7 +11,7 @@ public class AppMain extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("scene1.fxml"));
-        primaryStage.setTitle("Battleship");
+        primaryStage.setTitle("MediaLab Battleship");
         primaryStage.setScene(new Scene(root, 640, 450));
         primaryStage.show();
 

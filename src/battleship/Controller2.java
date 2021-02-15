@@ -18,7 +18,18 @@ public class Controller2 {
     private Color[][] player_state;
     private Color[][] cpu_state;
     private boolean cpu_first;
-    private int round = 0;
+    private int round = 1;
+    private int cpu_active = 5;
+    private int cpu_score = 0;
+    private int cpu_acc = 0;
+    private int cpu_shots = 0;
+    private int cpu_hit_shots = 0;
+    private int player_active = 5;
+    private int player_score = 0;
+    private int player_acc = 0;
+    private int player_shots = 0;
+    private int player_hit_shots = 0;
+
 
     public GridPane player_grid;
     public GridPane cpu_grid;
@@ -27,6 +38,15 @@ public class Controller2 {
     public Label plays_first;
     public Label who_won;
     public Label wasting;
+    public Label cpu_active_label;
+    public Label cpu_score_label;
+    public Label cpu_acc_label;
+    public Label player_active_label;
+    public Label player_score_label;
+    public Label player_acc_label;
+    public Label round_cnt_label;
+    public Label max_rounds;
+
 
 
     public void setMap(Map input_map) {
@@ -63,6 +83,15 @@ public class Controller2 {
         plays_first.setText( (cpu_first) ? "Cpu plays first" : "You play first");
         who_won.setVisible(false);
         wasting.setVisible(false);
+        max_rounds.setVisible(false);
+        cpu_active_label.setText(Integer.toString(cpu_active));
+        cpu_score_label.setText(Integer.toString(cpu_score));
+        cpu_acc_label.setText(cpu_acc + "%");
+        player_active_label.setText(Integer.toString(player_active));
+        player_score_label.setText(Integer.toString(player_score));
+        player_acc_label.setText(player_acc + "%");
+
+        round_cnt_label.setText("Round " + round);
 
         cpu_state = new Color[11][11];
 
@@ -98,13 +127,18 @@ public class Controller2 {
     private void nextRound(int x, int y){
         wasting.setVisible(false);
         round++;
-        int cpu_score = 0;
-        if(cpu_first)
-           cpu_score = cpu_player.random_play(player_map);
+        int cpu_score_inc = 0;
+        if(cpu_first) {
+            cpu_score_inc = cpu_player.random_play(player_map);
+        }
 
         int score = player.play(x, y, cpu_map);
-        if(score > 0)
+        player_shots++;
+        if(score > 0) {
             cpu_state[x][y] = Color.RED;
+            player_score += score;
+            player_hit_shots++;
+        }
         else if(score == -3){
             cpu_state[x][y] = Color.RED;
             who_won.setText("You Won!!!");
@@ -117,12 +151,45 @@ public class Controller2 {
             cpu_state[x][y] = Color.BLACK;
 
         if(!cpu_first)
-            cpu_score = cpu_player.random_play(player_map);
+            cpu_score_inc = cpu_player.random_play(player_map);
 
-        if(cpu_score == -3){
+        cpu_shots++;
+
+        if(cpu_score_inc == -3){
             who_won.setText("You Lost...");
             who_won.setVisible(true);
         }
+        else if(cpu_score_inc > 0) {
+            cpu_score += cpu_score_inc;
+            cpu_hit_shots++;
+        }
+
+        player_acc = 100 * player_hit_shots / player_shots;
+        player_acc_label.setText(player_acc + "%");
+
+        cpu_acc = 100 * cpu_hit_shots / cpu_shots;
+        cpu_acc_label.setText(cpu_acc + "%");
+
+        cpu_score_label.setText(Integer.toString(cpu_score));
+        player_score_label.setText(Integer.toString(player_score));
+
+        if(round  >= 40){
+            max_rounds.setVisible(true);
+            if(player_score > cpu_score){
+                who_won.setText("You Won!!!");
+                who_won.setVisible(true);
+            }
+            else if(player_score < cpu_score){
+                who_won.setText("You Lost...");
+                who_won.setVisible(true);
+            }
+            else{
+                who_won.setText("Draw");
+                who_won.setVisible(true);
+            }
+        }
+
+        round_cnt_label.setText("Round " + round);
 
         for (int i = 1; i <= 10 ; i++)
             for (int j = 0; j <= 10 ; j++) {

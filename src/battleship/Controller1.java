@@ -61,15 +61,15 @@ public class Controller1 {
                                     new Point(des_x, des_y), des_dir);
             System.out.println("Ok!");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("scene2.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("scene2_new.fxml"));
             Parent root2 = (Parent) loader.load();
 
             Controller2 contr2 = loader.getController();    //get controller2
             contr2.setMap(input_map);   //give input map to controller 2
 
-            Scene scene2 = new Scene(root2,640, 450);
+            Scene scene2 = new Scene(root2,605, 580);
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();    //get the stage from the event
-            window.setTitle("Battleship");
+            window.setTitle("MediaLab Battleship");
             window.setScene(scene2);
             window.show();
 

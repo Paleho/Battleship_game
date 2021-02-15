@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,7 +15,25 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="battleship.Controller2">
    <children>
-      <GridPane fx:id="player_grid" prefHeight="300.0" prefWidth="300.0">
+      <MenuBar layoutX="-7.0" layoutY="-3.0" prefHeight="25.0" prefWidth="611.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Application">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Start" />
+                  <MenuItem mnemonicParsing="false" text="Load" />
+                  <MenuItem mnemonicParsing="false" text="Exit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Details">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Enemy Ships" />
+                  <MenuItem mnemonicParsing="false" text="Player Shots" />
+                  <MenuItem mnemonicParsing="false" text="Enemy Shots" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <GridPane fx:id="player_grid" layoutX="-7.0" layoutY="150.0" prefHeight="300.0" prefWidth="300.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -162,10 +183,10 @@
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="19.0" text="10" GridPane.columnIndex="10" />
          </children>
       </GridPane>
-      <Button layoutX="425.0" layoutY="338.0" mnemonicParsing="false" onAction="#handleShot" text="Shoot" />
-      <TextField fx:id="target_x" layoutX="511.0" layoutY="325.0" prefHeight="25.0" prefWidth="59.0" />
-      <TextField fx:id="target_y" layoutX="511.0" layoutY="369.0" prefHeight="25.0" prefWidth="59.0" />
-      <GridPane fx:id="cpu_grid" layoutX="299.0" prefHeight="300.0" prefWidth="300.0">
+      <Button layoutX="416.0" layoutY="481.0" mnemonicParsing="false" onAction="#handleShot" text="Shoot" />
+      <TextField fx:id="target_x" layoutX="502.0" layoutY="468.0" prefHeight="25.0" prefWidth="59.0" />
+      <TextField fx:id="target_y" layoutX="502.0" layoutY="512.0" prefHeight="25.0" prefWidth="59.0" />
+      <GridPane fx:id="cpu_grid" layoutX="292.0" layoutY="150.0" prefHeight="300.0" prefWidth="300.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -315,12 +336,31 @@
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="19.0" text="10" GridPane.columnIndex="10" />
          </children>
       </GridPane>
-      <Label fx:id="plays_first" layoutX="48.0" layoutY="342.0" prefHeight="17.0" prefWidth="117.0" text="&lt;who plays first&gt;" />
-      <Label fx:id="who_won" layoutX="268.0" layoutY="355.0" prefHeight="30.0" prefWidth="148.0" text="&lt;who won&gt;">
+      <Label fx:id="plays_first" layoutX="39.0" layoutY="485.0" prefHeight="17.0" prefWidth="117.0" text="&lt;who plays first&gt;" />
+      <Label fx:id="who_won" layoutX="259.0" layoutY="498.0" prefHeight="30.0" prefWidth="148.0" text="&lt;who won&gt;">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="wasting" layoutX="48.0" layoutY="357.0" prefHeight="30.0" prefWidth="196.0" text="Don't waste shots on the same tiles" />
+      <Label fx:id="wasting" layoutX="39.0" layoutY="500.0" prefHeight="30.0" prefWidth="196.0" text="Don't waste shots on the same tiles" />
+      <Label layoutX="26.0" layoutY="57.0" prefHeight="17.0" prefWidth="30.0" text="CPU" />
+      <Label layoutX="26.0" layoutY="77.0" text="active ships:" />
+      <Label layoutX="26.0" layoutY="97.0" text="Score: " />
+      <Label layoutX="26.0" layoutY="117.0" text="Accuracy:" />
+      <Label fx:id="cpu_active_label" layoutX="101.0" layoutY="77.0" text="&lt;active&gt;" />
+      <Label fx:id="cpu_score_label" layoutX="101.0" layoutY="97.0" text="&lt;score&gt;" />
+      <Label fx:id="cpu_acc_label" layoutX="101.0" layoutY="117.0" text="&lt;acc&gt;" />
+      <Label layoutX="321.0" layoutY="57.0" prefHeight="17.0" prefWidth="59.0" text="Player" />
+      <Label layoutX="321.0" layoutY="77.0" text="active ships:" />
+      <Label layoutX="321.0" layoutY="97.0" text="Score: " />
+      <Label layoutX="321.0" layoutY="117.0" text="Accuracy:" />
+      <Label fx:id="player_active_label" layoutX="396.0" layoutY="77.0" text="&lt;active&gt;" />
+      <Label fx:id="player_score_label" layoutX="396.0" layoutY="97.0" text="&lt;score&gt;" />
+      <Label fx:id="player_acc_label" layoutX="396.0" layoutY="117.0" text="&lt;acc&gt;" />
+      <Label fx:id="round_cnt_label" layoutX="242.0" layoutY="27.0" prefHeight="17.0" prefWidth="117.0" text="Round #">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
