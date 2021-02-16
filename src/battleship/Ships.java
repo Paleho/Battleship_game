@@ -68,9 +68,12 @@ class Ship{
             if(p != null && p.getY() == y && p.getX() == x){
                 hitbox[i] = null;
                 hitpoints--;
+                state = ShipState.Damaged;
                 System.out.printf("ship hitpoints = %d\n", hitpoints); //debug
-                if(hitpoints <= 0)
+                if(hitpoints <= 0) {
+                    state = ShipState.Destroyed;
                     return sink() + damage_bonus;
+                }
                 return damage_bonus;
             }
         }

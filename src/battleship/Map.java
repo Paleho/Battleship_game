@@ -307,6 +307,17 @@ class Map {
 
     public int getHitpoints(){ return map_hitpoints;}
 
+    public int getActiveShips(){
+        int count = 0;
+        count += (carrier.state == Ship.ShipState.Destroyed) ? 0 : 1;
+        count += (battleship.state == Ship.ShipState.Destroyed) ? 0 : 1;
+        count += (cruiser.state == Ship.ShipState.Destroyed) ? 0 : 1;
+        count += (submarine.state == Ship.ShipState.Destroyed) ? 0 : 1;
+        count += (destroyer.state == Ship.ShipState.Destroyed) ? 0 : 1;
+
+        return count;
+    }
+
     //returns true if there is no occupied tile between p and p + dist (vertically or horizontally)
     private boolean overlaps(Point p, int dist, boolean vert){
         if(vert){

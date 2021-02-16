@@ -173,6 +173,9 @@ public class Controller2 {
         cpu_score_label.setText(Integer.toString(cpu_score));
         player_score_label.setText(Integer.toString(player_score));
 
+        cpu_active_label.setText(Integer.toString(cpu_map.getActiveShips()));
+        player_active_label.setText(Integer.toString(player_map.getActiveShips()));
+
         if(round  >= 40){
             max_rounds.setVisible(true);
             if(player_score > cpu_score){
