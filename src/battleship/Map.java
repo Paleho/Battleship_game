@@ -318,6 +318,41 @@ class Map {
         return count;
     }
 
+    public String getShipType(int x, int y){
+        System.out.println("Looking at point: x = " + x + ", y = " + y);
+        for(Point i : carrier.hitbox){
+//            System.out.printf("Checking point(%d,%d)", i.getX(), i.getY());
+            if(i != null && i.getX() == x && i.getY() == y){
+                return "Carrier";
+            }
+        }
+        for(Point i : battleship.hitbox){
+//            System.out.printf("Checking point(%d,%d)", i.getX(), i.getY());
+            if(i != null && i.getX() == x && i.getY() == y){
+                return "Battleship";
+            }
+        }
+        for(Point i : cruiser.hitbox){
+//            System.out.printf("Checking point(%d,%d)", i.getX(), i.getY());
+            if(i != null && i.getX() == x && i.getY() == y){
+                return "Cruiser";
+            }
+        }
+        for(Point i : submarine.hitbox){
+//            System.out.printf("Checking point(%d,%d)", i.getX(), i.getY());
+            if(i != null && i.getX() == x && i.getY() == y){
+                return "Submarine";
+            }
+        }
+        for(Point i : destroyer.hitbox){
+//            System.out.printf("Checking point(%d,%d)", i.getX(), i.getY());
+            if(i != null && i.getX() == x && i.getY() == y){
+                return "Destroyer";
+            }
+        }
+        return "None";
+    }
+
     //returns true if there is no occupied tile between p and p + dist (vertically or horizontally)
     private boolean overlaps(Point p, int dist, boolean vert){
         if(vert){

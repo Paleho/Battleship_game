@@ -28,8 +28,8 @@
             <Menu mnemonicParsing="false" text="Details">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#handleEnemyShips" text="Enemy Ships" />
-                  <MenuItem mnemonicParsing="false" text="Player Shots" />
-                  <MenuItem mnemonicParsing="false" text="Enemy Shots" />
+                  <MenuItem mnemonicParsing="false" onAction="#handlePlayerShots" text="Player Shots" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleEnemyShots" text="Enemy Shots" />
                </items>
             </Menu>
          </menus>

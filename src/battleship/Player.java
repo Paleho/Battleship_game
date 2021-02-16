@@ -1,5 +1,7 @@
 package battleship;
 
+import java.util.Stack;
+
 class Player {
     String name;
     Map ships_map;
@@ -7,6 +9,7 @@ class Player {
 //    -1  --> no info for that tile
 //    0   --> shot that tile but nothing was there
 //    1   --> successful shot
+    public Stack<ShotRecord> ShotLog = new Stack<>();
 
     public Player(String name, Map ships){
         this.name = name;
@@ -36,17 +39,22 @@ class Player {
             return -2;
         }
 
+        String shipType = enemy_map.getShipType(x, y);
+
         int result = enemy_map.shoot(x, y);
         if(result == 0){    // nothing hit
             shooting_map[x][y] = 0;
+            ShotLog.push(new ShotRecord(x, y, false, "None"));
             return result;
         }
         else if(result > 0 ){
             shooting_map[x][y] = 1;
+            ShotLog.push(new ShotRecord(x, y, true, shipType));
             return result;
         }
         else if(result == -2){
             System.out.println("player won!");
+            ShotLog.push(new ShotRecord(x, y, true, shipType));
             return -3;
         }
         else{   //error

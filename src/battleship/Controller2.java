@@ -289,4 +289,56 @@ public class Controller2 {
         else if(state == Ship.ShipState.Damaged) return "Damaged";
         else return "Destroyed";
     }
+
+    public void handlePlayerShots(){
+        ShotRecord[] buff = new ShotRecord[5];
+        int n = (round > 5) ? 5 : round - 1;
+        //Get last 5 moves
+        for(int i = 0; i < n; i++) {
+            buff[i] = player.ShotLog.pop();
+        }
+        //Push em back into the stack
+        for(int i = n-1; i >= 0 ; i--) {
+            player.ShotLog.push(buff[i]);
+        }
+
+        System.out.println("in PlayerShots");
+        Stage popup_window = new Stage();
+        VBox popup_Vbox = new VBox(20);
+
+        for(int i = 0; i < n; i++) {
+            popup_Vbox.getChildren().add(new Text("Player move -" + (i+1) + " : " + buff[i].toString()));
+        }
+
+        Scene popup_Scene = new Scene(popup_Vbox, 350, 200);
+        popup_window.setTitle("Player Shots");
+        popup_window.setScene(popup_Scene);
+        popup_window.show();
+    }
+
+    public void handleEnemyShots(){
+        ShotRecord[] buff = new ShotRecord[5];
+        int n = (round > 5) ? 5 : round - 1;
+        //Get last 5 moves
+        for(int i = 0; i < n; i++) {
+            buff[i] = cpu_player.ShotLog.pop();
+        }
+        //Push em back into the stack
+        for(int i = n-1; i >= 0 ; i--) {
+            cpu_player.ShotLog.push(buff[i]);
+        }
+
+        System.out.println("in EnemyShots");
+        Stage popup_window = new Stage();
+        VBox popup_Vbox = new VBox(20);
+
+        for(int i = 0; i < n; i++) {
+            popup_Vbox.getChildren().add(new Text("CPU move -" + (i+1) + " : " + buff[i].toString()));
+        }
+
+        Scene popup_Scene = new Scene(popup_Vbox, 350, 200);
+        popup_window.setTitle("Enemy Shots");
+        popup_window.setScene(popup_Scene);
+        popup_window.show();
+    }
 }
