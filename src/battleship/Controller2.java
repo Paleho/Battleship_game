@@ -1,11 +1,18 @@
 package battleship;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
 import java.util.Random;
 
 
@@ -228,5 +235,58 @@ public class Controller2 {
             }
         }
         return res;
+    }
+
+    public void handleStart(){
+        System.out.println("Starting");
+
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("scene1.fxml"));
+            Parent root1 = (Parent) loader.load();
+
+            Controller1 contr1 = loader.getController();    //get controller1
+
+            Scene scene1 = new Scene(root1, 640, 450);
+            Stage window = (Stage) player_grid.getScene().getWindow();    //get the stage from the event
+
+            window.setTitle("MediaLab Battleship");
+            window.setScene(scene1);
+            window.show();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void handleLoad(){
+        System.out.println("Loading...");
+    }
+
+    public void handleExit(){
+        System.out.println("Exiting...");
+        System.exit(0);
+    }
+
+    public void handleEnemyShips(){
+        System.out.println("in Enemy Ships");
+        Stage popup_window = new Stage();
+        VBox popup_Vbox = new VBox(20);
+
+        popup_Vbox.getChildren().add(new Text("Enemy Carrier: " + ShipStateToString(cpu_map.carrier.state)));
+        popup_Vbox.getChildren().add(new Text("Enemy Battleship: " + ShipStateToString(cpu_map.battleship.state)));
+        popup_Vbox.getChildren().add(new Text("Enemy Cruiser: " + ShipStateToString(cpu_map.cruiser.state)));
+        popup_Vbox.getChildren().add(new Text("Enemy Submarine: " + ShipStateToString(cpu_map.submarine.state)));
+        popup_Vbox.getChildren().add(new Text("Enemy Destroyer: " + ShipStateToString(cpu_map.destroyer.state)));
+
+
+        Scene popup_Scene = new Scene(popup_Vbox, 300, 200);
+        popup_window.setTitle("Enemy Ships");
+        popup_window.setScene(popup_Scene);
+        popup_window.show();
+    }
+
+    private String ShipStateToString(Ship.ShipState state){
+        if(state == Ship.ShipState.Intact) return "Intact";
+        else if(state == Ship.ShipState.Damaged) return "Damaged";
+        else return "Destroyed";
     }
 }

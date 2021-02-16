@@ -20,14 +20,14 @@
          <menus>
             <Menu mnemonicParsing="false" text="Application">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Start" />
-                  <MenuItem mnemonicParsing="false" text="Load" />
-                  <MenuItem mnemonicParsing="false" text="Exit" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleStart" text="Start" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleLoad" text="Load" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Details">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Enemy Ships" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleEnemyShips" text="Enemy Ships" />
                   <MenuItem mnemonicParsing="false" text="Player Shots" />
                   <MenuItem mnemonicParsing="false" text="Enemy Shots" />
                </items>
@@ -347,14 +347,14 @@
             </Label>
             <Label fx:id="wasting" layoutX="39.0" layoutY="490.0" prefHeight="17.0" prefWidth="196.0" text="Don't waste shots on the same tiles" />
             <Label layoutX="26.0" layoutY="57.0" prefHeight="17.0" prefWidth="30.0" text="CPU" />
-            <Label layoutX="26.0" layoutY="77.0" text="active ships:" />
+            <Label layoutX="26.0" layoutY="77.0" text="Active ships:" />
             <Label layoutX="26.0" layoutY="97.0" text="Score: " />
             <Label layoutX="26.0" layoutY="117.0" text="Accuracy:" />
             <Label fx:id="cpu_active_label" layoutX="101.0" layoutY="77.0" text="&lt;active&gt;" />
             <Label fx:id="cpu_score_label" layoutX="101.0" layoutY="97.0" text="&lt;score&gt;" />
             <Label fx:id="cpu_acc_label" layoutX="101.0" layoutY="117.0" text="&lt;acc&gt;" />
             <Label layoutX="321.0" layoutY="57.0" prefHeight="17.0" prefWidth="59.0" text="Player" />
-            <Label layoutX="321.0" layoutY="77.0" text="active ships:" />
+            <Label layoutX="321.0" layoutY="77.0" text="Active ships:" />
             <Label layoutX="321.0" layoutY="97.0" text="Score: " />
             <Label layoutX="321.0" layoutY="117.0" text="Accuracy:" />
             <Label fx:id="player_active_label" layoutX="396.0" layoutY="77.0" text="&lt;active&gt;" />

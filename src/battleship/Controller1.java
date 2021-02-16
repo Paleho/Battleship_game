@@ -78,4 +78,17 @@ public class Controller1 {
         }
     }
 
+    public void handleStart(){
+        System.out.println("You are already in start");
+    }
+
+    public void handleLoad(){
+        System.out.println("Loading...");
+    }
+
+    public void handleExit(){
+        System.out.println("Exiting...");
+        System.exit(0);
+    }
+
 }
