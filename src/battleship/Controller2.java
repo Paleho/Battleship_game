@@ -269,6 +269,21 @@ public class Controller2 {
 
     public void handleLoad(){
         System.out.println("Loading...");
+        try{
+            Stage popup_window = new Stage();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Loading_scene.fxml"));
+            Parent loading_root = (Parent) loader.load();
+
+            LoadingController contr = loader.getController();    //get LoadingController
+
+            Scene l_scene = new Scene(loading_root, 200, 150);
+            popup_window.setTitle("Load");
+            popup_window.setScene(l_scene);
+            popup_window.show();
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     public void handleExit(){
