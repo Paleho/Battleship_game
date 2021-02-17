@@ -59,13 +59,15 @@ public class Controller1 {
                                     new Point(cru_x, cru_y), cru_dir,
                                     new Point(sub_x, sub_y), sub_dir,
                                     new Point(des_x, des_y), des_dir);
+
+            Map cpu_map = new Map();    //random cpu map
             System.out.println("Ok!");
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("scene2_new.fxml"));
             Parent root2 = (Parent) loader.load();
 
             Controller2 contr2 = loader.getController();    //get controller2
-            contr2.setMap(input_map);   //give input map to controller 2
+            contr2.setMap(input_map, cpu_map);   //give input map to controller 2
 
             Scene scene2 = new Scene(root2,605, 580);
             Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();    //get the stage from the event
@@ -91,6 +93,7 @@ public class Controller1 {
             Parent loading_root = (Parent) loader.load();
 
             LoadingController contr = loader.getController();    //get LoadingController
+            contr.setWin((Stage) readyButton.getScene().getWindow()); // pass current stage to loading controller
 
             Scene l_scene = new Scene(loading_root, 200, 150);
             popup_window.setTitle("Load");

@@ -16,7 +16,7 @@ class Map {
                Point bat_point, Direction bat_direction,
                Point cru_point, Direction cru_direction,
                Point sub_point, Direction sub_direction,
-               Point des_point, Direction des_direction) throws ShipsOverlap {
+               Point des_point, Direction des_direction) throws ShipsOverlap, OversizeException {
         //Initialize occupied table
         for (int i = 0; i <= 11; i++) {
             for(int j = 0; j <= 11; j++)

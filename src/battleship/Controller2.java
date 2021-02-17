@@ -59,7 +59,7 @@ public class Controller2 {
 
 
 
-    public void setMap(Map input_map) {
+    public void setMap(Map input_map, Map enemy_map) {
         player_map = input_map;
         player_state = new Color[11][11];
 
@@ -84,7 +84,7 @@ public class Controller2 {
             player_state[p.getX()][p.getY()] = Color.VIOLET;
         }
 
-        cpu_map = new Map();    //random cpu map
+        cpu_map = enemy_map;
         cpu_player = new RandomPlayer("CPU", cpu_map);
         player = new Player("USER", player_map);
         Random rand = new Random();
@@ -257,7 +257,7 @@ public class Controller2 {
             Controller1 contr1 = loader.getController();    //get controller1
 
             Scene scene1 = new Scene(root1, 640, 450);
-            Stage window = (Stage) player_grid.getScene().getWindow();    //get the stage from the event
+            Stage window = (Stage) player_grid.getScene().getWindow();    //get the stage from the player_grid
 
             window.setTitle("MediaLab Battleship");
             window.setScene(scene1);
@@ -276,6 +276,7 @@ public class Controller2 {
             Parent loading_root = (Parent) loader.load();
 
             LoadingController contr = loader.getController();    //get LoadingController
+            contr.setWin((Stage) player_grid.getScene().getWindow()); // pass current stage to loading controller
 
             Scene l_scene = new Scene(loading_root, 200, 150);
             popup_window.setTitle("Load");

@@ -12,3 +12,9 @@ class ShipsOverlap extends Exception{
         super(s);
     }
 }
+
+class OversizeException extends Exception{
+    public OversizeException(String s){
+        super(s);
+    }
+}

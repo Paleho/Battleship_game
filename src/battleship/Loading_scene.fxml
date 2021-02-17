@@ -10,5 +10,7 @@
       <TextField fx:id="scenario_id" layoutX="14.0" layoutY="54.0" prefHeight="25.0" prefWidth="105.0" />
       <Label layoutX="14.0" layoutY="21.0" text="Choose Scenario-ID" />
       <Button layoutX="46.0" layoutY="90.0" mnemonicParsing="false" onAction="#handleLoadBtn" text="Load" />
+      <Label fx:id="scenario_not_found" layoutX="15.0" layoutY="126.0" text="Scenario not found!" />
+      <Label fx:id="invalid_input" layoutX="33.0" layoutY="126.0" text="Invalid Input!" />
    </children>
 </AnchorPane>

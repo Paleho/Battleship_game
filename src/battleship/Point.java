@@ -15,7 +15,7 @@ class Point{
     }
 
     //relative battleship.Point constructor
-    public Point(Point other_point, Direction dir, int distance){
+    public Point(Point other_point, Direction dir, int distance) throws OversizeException{
         int new_x, new_y;
 
         switch (dir) {
@@ -48,6 +48,7 @@ class Point{
         }
         else{
             System.out.print("Invalid point initialization!\n");
+            throw new OversizeException("Ship out of bounds!");
         }
     }
 
