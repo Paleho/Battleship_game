@@ -10,7 +10,12 @@ public class AppMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("scene1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("scene1.fxml"));
+        Parent root = (Parent) loader.load();
+
+        Controller1 contr1 = loader.getController();    //get controller1
+        contr1.clearErrors();   //clear error messages
+
         primaryStage.setTitle("MediaLab Battleship");
         primaryStage.setScene(new Scene(root, 640, 450));
         primaryStage.show();

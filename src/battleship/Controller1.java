@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
@@ -30,9 +31,19 @@ public class Controller1 {
     public TextField txt_des_x;
     public TextField txt_des_y;
     public CheckBox chk_des_vert;
+    public Label overlap;
+    public Label out_of_bounds;
+
+    public void clearErrors(){
+        overlap.setVisible(false);
+        out_of_bounds.setVisible(false);
+    }
 
     public void handleReadyButton(javafx.event.ActionEvent event){
         try{
+            overlap.setVisible(false);
+            out_of_bounds.setVisible(false);
+
             int car_x = Integer.parseInt(txt_car_x.getText());
             int car_y = Integer.parseInt(txt_car_y.getText());
             Point.isPoint(car_x, car_y);
@@ -75,7 +86,16 @@ public class Controller1 {
             window.setScene(scene2);
             window.show();
 
-        }catch (Exception e){
+        }
+        catch (OversizeException e){
+            out_of_bounds.setVisible(true);
+            System.out.println(e);
+        }
+        catch (ShipsOverlap e){
+            overlap.setVisible(true);
+            System.out.println(e);
+        }
+        catch (Exception e){
             System.out.println(e);
         }
     }
