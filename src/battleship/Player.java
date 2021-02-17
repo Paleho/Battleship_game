@@ -10,6 +10,7 @@ class Player {
 //    0   --> shot that tile but nothing was there
 //    1   --> successful shot
     public Stack<ShotRecord> ShotLog = new Stack<>();
+    private boolean player_alreadyWon = false;
 
     public Player(String name, Map ships){
         this.name = name;
@@ -34,6 +35,8 @@ class Player {
             return -1;
         }
 
+        if(player_alreadyWon) return 0;
+
         if(shooting_map[x][y] != -1){
             System.out.println("Don't waste shots on the same tiles");
             return -2;
@@ -54,6 +57,7 @@ class Player {
         }
         else if(result == -2){
             System.out.println("player won!");
+            player_alreadyWon = true;
             ShotLog.push(new ShotRecord(x, y, true, shipType));
             return -3;
         }

@@ -36,6 +36,9 @@ public class Controller2 {
     private int player_acc = 0;
     private int player_shots = 0;
     private int player_hit_shots = 0;
+    private boolean cpu_allShipsDown = false;
+    private boolean player_allShipsDown = false;
+    private boolean player_preAllShipsDown = false;
 
 
     public GridPane player_grid;
@@ -134,6 +137,7 @@ public class Controller2 {
     private void nextRound(int x, int y){
         wasting.setVisible(false);
         round++;
+
         int cpu_score_inc = 0;
         if(cpu_first) {
             cpu_score_inc = cpu_player.random_play(player_map);
@@ -147,7 +151,13 @@ public class Controller2 {
             player_hit_shots++;
         }
         else if(score == -3){
-            cpu_state[x][y] = Color.RED;
+            if(cpu_allShipsDown){
+                cpu_state[x][y] = Color.BLACK;
+            }
+            else{
+                cpu_state[x][y] = Color.RED;
+                cpu_allShipsDown = true;
+            }
             who_won.setText("You Won!!!");
             who_won.setVisible(true);
         }
