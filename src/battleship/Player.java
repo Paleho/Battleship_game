@@ -39,6 +39,7 @@ class Player {
 
         if(shooting_map[x][y] != -1){
             System.out.println("Don't waste shots on the same tiles");
+            ShotLog.push(new ShotRecord(x, y, false, "None"));
             return -2;
         }
 
