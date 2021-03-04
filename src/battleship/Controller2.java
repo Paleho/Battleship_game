@@ -161,7 +161,7 @@ public class Controller2 {
             who_won.setText("You Won!!!");
             who_won.setVisible(true);
         }
-        else if (score == -2){
+        else if (score == -2 || score == -1){
             wasting.setVisible(true);
         }
         else
@@ -193,7 +193,7 @@ public class Controller2 {
         cpu_active_label.setText(Integer.toString(cpu_map.getActiveShips()));
         player_active_label.setText(Integer.toString(player_map.getActiveShips()));
 
-        if(round  >= 40){
+        if(round  > 40){
             max_rounds.setVisible(true);
             if(player_score > cpu_score){
                 who_won.setText("You Won!!!");
@@ -255,6 +255,7 @@ public class Controller2 {
             Parent root1 = (Parent) loader.load();
 
             Controller1 contr1 = loader.getController();    //get controller1
+            contr1.clearErrors();   //clear error messages
 
             Scene scene1 = new Scene(root1, 640, 450);
             Stage window = (Stage) player_grid.getScene().getWindow();    //get the stage from the player_grid

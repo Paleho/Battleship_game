@@ -345,7 +345,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label fx:id="wasting" layoutX="39.0" layoutY="490.0" prefHeight="17.0" prefWidth="196.0" text="Don't waste shots on the same tiles" />
+            <Label fx:id="wasting" layoutX="39.0" layoutY="490.0" prefHeight="17.0" prefWidth="294.0" text="Don't waste shots on the same cells or out of bounds" />
             <Label layoutX="26.0" layoutY="57.0" prefHeight="17.0" prefWidth="30.0" text="CPU" />
             <Label layoutX="26.0" layoutY="77.0" text="Active ships:" />
             <Label layoutX="26.0" layoutY="97.0" text="Score: " />
