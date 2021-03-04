@@ -12,6 +12,27 @@ class Map {
 
     private boolean[][] occupied = new boolean[12][12];
 
+    /**
+     * Class constructor specifying a starting point and a direction for each ship that will be placed in the map.
+     *
+     * The map object created represents the board of a player and stores the position of the 5 ships. It can be
+     * used to shoot/attack the player that is regarded as the map's owner and get information about it's state.
+     *
+     * @param car_point a point representing one end of Carrier
+     * @param car_direction the direction in which Carrier is placed
+     * @param bat_point a point representing one end of Battleship
+     * @param bat_direction the direction in which Battleship is placed
+     * @param cru_point a point representing one end of Cruiser
+     * @param cru_direction the direction in which Cruiser is placed
+     * @param sub_point a point representing one end of Submarine
+     * @param sub_direction the direction in which Submarine is placed
+     * @param des_point a point representing one end of Destroyer
+     * @param des_direction the direction in which Destroyer is placed
+     * @throws ShipsOverlap if the cells of two (or more) ships overlap; or if at least two ships occupy
+     *                      adjacent (vertically or horizontally) cells
+     * @throws OversizeException if one or more ships need to occupy cells that are beyond the borders of
+     *                           the 10x10 grid.
+     */
     public Map(Point car_point, Direction car_direction,
                Point bat_point, Direction bat_direction,
                Point cru_point, Direction cru_direction,
@@ -99,6 +120,12 @@ class Map {
     }
 
     //random map constructor
+
+    /**
+     * Class constructor that generates a random map.
+     *
+     * The placement of the ships is according to the rules. It can be used for the "defence" board of CPU-player
+     */
     public Map(){
         //Initialize occupied table
         for (int i = 0; i <= 11; i++) {
@@ -237,6 +264,9 @@ class Map {
         map_hitpoints = 17;
     }
 
+    /**
+     * Prints each ship's position in the map.
+     */
     public void print_map(){
         carrier.print_Ship();
         battleship.print_Ship();
@@ -245,10 +275,19 @@ class Map {
         destroyer.print_Ship();
     }
 
-    //on successful hit returns score
-    //on unsuccessful attempt returns 0
-    //on invalid attempt returns -1
-    //on all ships down returns -2
+    /**
+     * Performs an attack at the (x, y) cell and informs the state of the map accordingly.
+     * <ul>
+     * <li>on successful hit returns score
+     * <li>on unsuccessful attempt returns 0
+     * <li>on invalid attempt returns -1
+     * <li>on all ships down returns -2
+     * </ul>
+     *
+     * @param x Specifies the vertical coordinate.
+     * @param y Specifies the horizontal coordinate.
+     * @return the outcome of the attack
+     */
     public int shoot(int x, int y){
         if(!(x >= 1 && x <= 10 && y >= 1 && y <= 10)){
             //out of bounds shot
@@ -305,8 +344,19 @@ class Map {
         return  ret;
     }
 
+    /**
+     *A getter method for map's hitpoints
+     *
+     * @return the hitpoints of the map (map's "health")
+     */
     public int getHitpoints(){ return map_hitpoints;}
 
+    /**
+     * Returns the amount of ships that are either in Intact or Damaged state.
+     *
+     * @return the number of active ships
+     * @see Ship.ShipState
+     */
     public int getActiveShips(){
         int count = 0;
         count += (carrier.state == Ship.ShipState.Destroyed) ? 0 : 1;
@@ -318,6 +368,13 @@ class Map {
         return count;
     }
 
+    /**
+     * Returns the type of ship that occupies the (x,y) cell or "None" if there is no ships there.
+     *
+     * @param x Specifies the vertical coordinate.
+     * @param y Specifies the horizontal coordinate.
+     * @return the ship type at the specified coordinates
+     */
     public String getShipType(int x, int y){
         for(Point i : carrier.hitbox){
             if(i != null && i.getX() == x && i.getY() == y){
